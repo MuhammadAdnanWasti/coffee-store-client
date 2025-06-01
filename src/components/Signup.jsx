@@ -10,13 +10,19 @@ const Signup = () => {
    
 const formData=new FormData(e.target);
   
-    const {email,password,...userProfile}= Object.fromEntries(formData.entries())
+    const {email,password,...rest}= Object.fromEntries(formData.entries())
+    
        createUser(email,password)
        .then(result=>{
+const userProfile={
+      email,
+      ...rest,
+      creationTime:result.user?.metadata?.creationTime,
+      lastSignInTime:result.user?.metadata?.lastSignInTime,
+    }
 
 
-
-        fetch('http://localhost:3000/users',{
+        fetch('https://coffee-store-server-eta-indol.vercel.app/users',{
 method:'POST',
 headers:{
   'content-type':'application/json'

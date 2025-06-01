@@ -14,6 +14,7 @@ import CoffeeDetails from './components/CoffeeDetails.jsx';
 import Signin from './components/Signin.jsx';
 import Signup from './components/Signup.jsx';
 import AuthProvider from './context/AuthProvider.jsx';
+import Users from './components/Users.jsx';
 
 let router = createBrowserRouter([
   {
@@ -21,19 +22,22 @@ let router = createBrowserRouter([
     Component: MainLayout,
    children:[
     {index:true, Component:Home,
-      loader:()=>fetch('http://localhost:3000/coffees')
+      loader:()=>fetch('https://coffee-store-server-eta-indol.vercel.app/coffees')
     },
     {path:'addCoffee', Component:AddCoffee},
     {path:'coffee/:id', Component:CoffeeDetails,
-      loader:({params})=>fetch(`http://localhost:3000/coffees/${params.id}`)
+      loader:({params})=>fetch(`https://coffee-store-server-eta-indol.vercel.app/coffees/${params.id}`)
     },
     {path:'updateCoffee/:id', Component:UpdateCoffee,
-       loader:({params})=>fetch(`http://localhost:3000/coffees/${params.id}`)
+       loader:({params})=>fetch(`https://coffee-store-server-eta-indol.vercel.app/coffees/${params.id}`)
     },
     {path:'signin', Component:Signin
     },
     {path:'signup', Component:Signup
     },
+    {path:'users', Component:Users, 
+      loader:()=>fetch('https://coffee-store-server-eta-indol.vercel.app/users')
+    }
    ]
   },
 ]);
